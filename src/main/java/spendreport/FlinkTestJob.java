@@ -210,8 +210,8 @@ public class FlinkTestJob {
 		tableEnv.getConfig().getConfiguration().setString("table.dynamic-table-options.enabled","true");
 
 		String catalogName = "mhive";
-//		String hiveConfPath = "/Users/linechina/eclipse-workspace/flink/flink-test/conf/";
-		String hiveConfPath = "/home/ec2-user/spark-3.0.0-bin-3.1.1/conf/";
+		String hiveConfPath = "/Users/linechina/eclipse-workspace/flink/flink-test/conf/";
+//		String hiveConfPath = "/home/ec2-user/spark-3.0.0-bin-3.1.1/conf/";
 		HiveCatalog catalog = new HiveCatalog(catalogName,"myhive",hiveConfPath,"3.1.1");
 		tableEnv.registerCatalog(catalogName,catalog);
 		tableEnv.useCatalog(catalogName);
@@ -234,6 +234,7 @@ public class FlinkTestJob {
 				"'partition.time-extractor.timestamp-pattern'='$dt $hr:$ts_minute:00',"+
 				"'sink.partition-commit.trigger'='partition-time',"+
 				"'sink.partition-commit.delay'='1 min',"+
+				"'sink.partition-commit.watermark-time-zone'='Asia/Shanghai',"+
 				"'sink.partition-commit.policy.kind'='metastore,success-file'"+
 				") ");
 
